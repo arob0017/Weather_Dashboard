@@ -9,9 +9,9 @@ function CityHistoryBtn(cityList) {
     if (savedLocations) {
         $("#prevSearchBtns").empty();
         var btns = $("<div>").attr("class", "list-group");
-        for (var i = 0; i < savedLocations.length; i++) {
-            var cityBtn = $("<button>").attr("href", "#").attr("id", "city-btn").text(savedLocations[i]);
-            if (savedLocations[i] == city) {
+        for (var i = 0; storedCities.length > i; i++) {
+            var cityBtn = $("<button>").attr("href", "#").attr("id", "city-btn").text(storedCities[i]);
+            if (storedCities[i] == city) {
                 cityBtn.attr("class", "list-group-item list-group-item-action active");
             }
             else {
@@ -23,7 +23,7 @@ function CityHistoryBtn(cityList) {
     }
 
 }
-function searchForecasts() {
+function searchForecasts(city) {
     // CityHistoryBtn(cityList);
     $.ajax({
         url: "https://api.openweathermap.org/data/2.5/weather?q=" + city + ",au&units=metric&appid=c7e4c50860cb5944f39ede1282e773c4",
@@ -52,7 +52,7 @@ function searchForecasts() {
             console.log(allData)
 
 
-            var cityName = $("<h2>").text(city);
+            var cityName = $("<h2>").text(forecastData.name);
             var nowMoment = moment();
             var displayMoment = $("<h3>").text(nowMoment.format("MMM/D/YYYY"))
             var weatherIcon = $("<img>");
