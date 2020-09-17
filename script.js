@@ -13,11 +13,11 @@ function CityHistoryBtn(cityList) {
 
         var splitStr = keys[i].toLowerCase().split(" ");
         for (var j = 0; j < splitStr.length; j++) {
-            splitStr[j] =
-                splitStr[j].charAt(0).toUpperCase() + splitStr[j].substring(1);
+            splitString[j] =
+                splitString[j].charAt(0).toUpperCase() + splitString[j].substring(1);
         }
 
-        cityBtn.text(splitStr.join(" "));
+        cityBtn.text(splitString.join(" "));
 
         $("#searchResults").append(cityBtn);
     }
