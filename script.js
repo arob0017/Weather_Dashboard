@@ -1,28 +1,28 @@
 
 var savedLocations = [];
 var city;
-var storedCities = JSON.parse(localStorage.getItem("cityBtn")) || [];
+var storedCities = JSON.parse(window.localStorage.getItem("storedCities")) || [];
+
 
 function CityHistoryBtn(cityList) {
-    $("#searchResults").empty();
+    // $("#searchResults").empty();
 
-    var keys = Object.keys(cityList);
-    for (var i = 0; i < keys.length; i++) {
-        var cityBtn = $("<button>");
-        cityBtn.addClass("list-group-item list-group-item-action");
-
-        var splitStr = keys[i].toLowerCase().split(" ");
-        for (var j = 0; j < splitStr.length; j++) {
-            splitString[j] =
-                splitString[j].charAt(0).toUpperCase() + splitString[j].substring(1);
+    if (savedLocations) {
+        $("#searchResults").empty();
+        var btns = $("<div>").attr("class", "list-group");
+        for (var i = 0; i < savedLocations.length; i++) {
+            var cityBtn = $("<button>").attr("href", "#").attr("id", "city-btn").text(savedLocations[i]);
+            if (savedLocations[i] == city) {
+                cityBtn.attr("class", "list-group-item list-group-item-action active");
+            }
+            else {
+                cityBtn.attr("class", "list-group-item list-group-item-action");
+            }
+            btns.prepend(cityBtn);
         }
-
-        cityBtn.text(splitString.join(" "));
-
-        $("#searchResults").append(cityBtn);
     }
-}
 
+}
 function searchForecasts() {
     // CityHistoryBtn(cityList);
     $.ajax({
@@ -47,11 +47,7 @@ function searchForecasts() {
             success: function (data) {
                 console.log(data);
             },
-            error: function () {
-                savedLocations.splice(savedLocations.indexOf(city), 1);
-                localStorage.setItem("searchArea", JSON.stringify(savedLocations));
-                PreviousSearch();
-            }
+
         }).then(function (allData) {
             console.log(allData)
 
@@ -91,6 +87,7 @@ $("#searchBtn").on("click", function (event) {
     city = $("#searchArea").val().trim();
     console.log("You searched for " + city)
     if (city != "") {
+        storedCities.push(city);
         localStorage.setItem("storedCities", JSON.stringify(storedCities));
         searchForecasts();
         CityHistoryBtn();
