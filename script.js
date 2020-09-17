@@ -23,7 +23,6 @@ function CityHistoryBtn(cityList) {
     }
 }
 
-
 function searchForecasts() {
     // CityHistoryBtn(cityList);
     $.ajax({
