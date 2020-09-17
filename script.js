@@ -1,11 +1,31 @@
 
 var savedLocations = [];
 var city;
+var storedCities = JSON.parse(localStorage.getItem("cityBtn")) || [];
 
+function CityHistoryBtn(cityList) {
+    $("#searchResults").empty();
+
+    var keys = Object.keys(cityList);
+    for (var i = 0; i < keys.length; i++) {
+        var cityBtn = $("<button>");
+        cityBtn.addClass("list-group-item list-group-item-action");
+
+        var splitStr = keys[i].toLowerCase().split(" ");
+        for (var j = 0; j < splitStr.length; j++) {
+            splitStr[j] =
+                splitStr[j].charAt(0).toUpperCase() + splitStr[j].substring(1);
+        }
+
+        cityBtn.text(splitStr.join(" "));
+
+        $("#searchResults").append(cityBtn);
+    }
+}
 
 
 function searchForecasts() {
-
+    // CityHistoryBtn(cityList);
     $.ajax({
         url: "https://api.openweathermap.org/data/2.5/weather?q=" + city + ",au&units=metric&appid=c7e4c50860cb5944f39ede1282e773c4",
         method: "GET",
@@ -19,13 +39,7 @@ function searchForecasts() {
         console.log(forecastData);
         var lon = forecastData.coord.lon;
         var lat = forecastData.coord.lat;
-        // function searchWeather(city) {
-        //     $.fetch({
-        //         url: "http://api.openweathermap.org/data/2.5/weather?q=" + city + ",au&appid=c7e4c50860cb5944f39ede1282e773c4"
-        //     }).then(function (fetchData) {
-        //         console.log(fetchData)
-        //     });
-        // };
+
 
         $.ajax({
             url: "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely&units=metric&appid=c7e4c50860cb5944f39ede1282e773c4",
@@ -55,7 +69,7 @@ function searchForecasts() {
             var feelsLike = $("<div>").text("Feels Like: " + forecastData.main.feels_like + " °C");
             var humidity = $("<div>").text("Humidity: " + forecastData.main.humidity + "%");
             var windSpeed = $("<div>").text("Wind Speed: " + forecastData.wind.speed + " MPH");
-            var UvIndex = $("<div>").text("UV Index: " + allData.current.uvi);
+            var UvIndex = $("<div>").addClass("btn btn-danger").text("UV Index: " + allData.current.uvi);
 
             $("#searchResults").empty();
             $("#searchResults").append(cityName, displayMoment, weatherIcon, todayTemp, feelsLike, humidity, windSpeed, UvIndex);
@@ -68,7 +82,6 @@ function searchForecasts() {
             // }
 
         });
-        // searchWeather(city);
     });
 };
 
@@ -78,7 +91,10 @@ $("#searchBtn").on("click", function (event) {
     event.preventDefault();
     city = $("#searchArea").val().trim();
     console.log("You searched for " + city)
-    searchForecasts();
+    if (city != "") {
+        localStorage.setItem("storedCities", JSON.stringify(storedCities));
+        searchForecasts();
+        CityHistoryBtn();
+    }
+
 });
-
-
