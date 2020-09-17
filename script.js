@@ -1,4 +1,4 @@
-// var searchHistory = JSON.parse(localStorage.getItem("searchArea")) || [];
+var searchHistory = JSON.parse(localStorage.getItem("searchArea")) || [];
 
 function searchForecasts() {
 
