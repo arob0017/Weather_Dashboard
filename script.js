@@ -1,12 +1,13 @@
-var searchHistory = JSON.parse(localStorage.getItem("searchArea")) || [];
 
-
+var savedLocations = [];
 var city;
-console.log(city);
+
+
+
 function searchForecasts() {
 
     $.ajax({
-        url: "https://api.openweathermap.org/data/2.5/weather?q=" + city + ",au&appid=c7e4c50860cb5944f39ede1282e773c4",
+        url: "https://api.openweathermap.org/data/2.5/weather?q=" + city + ",au&units=metric&appid=c7e4c50860cb5944f39ede1282e773c4",
         method: "GET",
         dataType: "json",
         success: function (data) {
@@ -32,21 +33,40 @@ function searchForecasts() {
             dataType: "json",
             success: function (data) {
                 console.log(data);
+            },
+            error: function () {
+                savedLocations.splice(savedLocations.indexOf(city), 1);
+                localStorage.setItem("searchArea", JSON.stringify(savedLocations));
+                PreviousSearch();
             }
         }).then(function (allData) {
             console.log(allData)
+
+
+            var cityName = $("<h2>").text(city);
             var nowMoment = moment();
             var displayMoment = $("<h3>").text(nowMoment.format("MMM/D/YYYY"))
+            var weatherIcon = $("<img>");
+            weatherIcon.attr(
+                "src",
+                "https://openweathermap.org/img/w/" + forecastData.weather[0].icon + ".png"
+            );
+            var todayTemp = $("<div>").text("Temperature: " + forecastData.main.temp + "°C");
+            var feelsLike = $("<div>").text("Feels Like: " + forecastData.main.feels_like + " °C");
+            var humidity = $("<div>").text("Humidity: " + forecastData.main.humidity + "%");
+            var windSpeed = $("<div>").text("Wind Speed: " + forecastData.wind.speed + " MPH");
+            var UvIndex = $("<div>").text("UV Index: " + allData.current.uvi);
 
-            var cityName = $("<h2>").text(city.name);
-            var todayTemp = $("<div>").text(main.temp);
-            var feelsLike = $("<div>").text(main.feels_like);
-            var humidity = $("<div>").text(main.humidity);
-            var windSpeed = $("<div>").text(wind.speed);
-            var UvIndex = $("<div>").text(value);
+            $("#searchResults").empty();
+            $("#searchResults").append(cityName, displayMoment, weatherIcon, todayTemp, feelsLike, humidity, windSpeed, UvIndex);
 
+            // for (var i = 1; i < allData.daily.length; i++) {
+            //     // var dayDate = $("<h4>").text(moment(format("MMM/D/YYYY")));
+            //     var dayTemp = $("<div>").text("Tempurature" + temp.day);
+            //     var dayHumidity = $("<div>").text("Humidity" + humidity);
+            //     $("#5DayForecast").append(dayDate, dayTemp, dayHumidity);
+            // }
 
-            $("#searchResults").append(displayMoment, cityName, todayTemp, feelsLike, humidity, windSpeed, UvIndex);
         });
         // searchWeather(city);
     });
@@ -57,7 +77,7 @@ $("#searchBtn").on("click", function (event) {
     // Preventing the button from trying to submit the form
     event.preventDefault();
     city = $("#searchArea").val().trim();
-    console.log("You searched for" + city)
+    console.log("You searched for " + city)
     searchForecasts();
 });
 

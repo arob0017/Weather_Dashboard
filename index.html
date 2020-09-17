@@ -19,28 +19,33 @@
 
     <main>
         <section class="row" class="search-column">
-            <form class="col-md-4" class="form-group">
-                <h2>Search for a City:</h2>
-                <input type="search" class="form-control" id="searchArea" aria-describedby="search"
-                    placeholder="Search ...">
-                <button type="submit" class="btn btn-dark" id="searchBtn"><i class="fas fa-search"></i></button>
-            </form>
-            <div id="prevSearchBtns"></div>
-        </section>
-        <section class="forecasts">
-            <div id="todayForecast">
-                <div>
-                    <span id="city-name" class="city-name"></span>
-                    <span id="current-icon"></span>
-                    <!-- <img id="today-img" src="placeholder" alt=""> -->
+            <div class="col-md-4">
+                <form class="col-md" class="form-group">
+                    <h2>Search for a City:</h2>
+                    <input type="search" class="form-control" id="searchArea" aria-describedby="search"
+                        placeholder="Search ...">
+                    <button type="submit" class="btn btn-dark" id="searchBtn"><i class="fas fa-search"></i></button>
+                </form>
+                <div id="prevSearchBtns"></div>
+            </div>
+            <div class="forecasts">
+                <div id="todayForecast">
+                    <div class="card-body">
+                        <span id="city-name" class="city-name"></span>
+                        <span id="current-icon"></span>
+                        <!-- <img id="today-img" src="placeholder" alt=""> -->
+                    </div>
+
+                    <div class="row" class="col-md-8">
+                        <div class="card" class="card-body">
+                            <div id="searchResults"></div>
+                        </div>
+                    </div>
+
                 </div>
-                <div id="searchResults"></div>
             </div>
 
             <div id="5DayForecast">
-                <div class="row">
-                    <h3>5-Day Forecast</h3>
-                </div>
             </div>
         </section>
 
