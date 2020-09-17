@@ -1,0 +1,15 @@
+main {
+    margin: 3%;
+}
+h1 {
+    padding: 20px;
+    text-align: center;
+    background-color: #343a40;
+    color: white;
+}
+
+form {
+    padding: 10px;
+}
+
+

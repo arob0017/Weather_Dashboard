@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Amelia's Weather Dashboard</title>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Weather Dashboard</h1>
+    </header>
+
+    <main>
+        <section class="row" class="search-column">
+            <form class="col-md-4" class="form-group">
+                <h2>Search for a City:</h2>
+                <input type="search" class="form-control" id="searchArea" aria-describedby="search"
+                    placeholder="Search ...">
+                <button type="submit" class="btn btn-dark" id="searchBtn"><i class="fas fa-search"></i></button>
+            </form>
+            <div id="prevSearchBtns"></div>
+        </section>
+        <section class="forecasts">
+            <div id="todayForecast">
+                <div>
+                    <span id="city-name" class="city-name"></span>
+                    <span id="current-icon"></span>
+                    <!-- <img id="today-img" src="placeholder" alt=""> -->
+                </div>
+                <div id="searchResults"></div>
+            </div>
+
+            <div id="5DayForecast">
+                <div class="row">
+                    <h3>5-Day Forecast</h3>
+                </div>
+            </div>
+        </section>
+
+    </main>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="script.js"></script>
+
+</html>
