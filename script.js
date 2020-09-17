@@ -1,18 +1,22 @@
 var searchHistory = JSON.parse(localStorage.getItem("searchArea")) || [];
+var city = $("#searchArea").val().trim();
 
 function searchForecasts() {
 
-
     $.ajax({
         url: "https://api.openweathermap.org/data/2.5/weather?q=" + city + ",au&appid=c7e4c50860cb5944f39ede1282e773c4",
-        method: "GET"
+        method: "GET",
+        dataType: "json",
+        success: function (data) {
+            console.log(data);
+        }
 
     }).then(function (forecastData) {
 
         console.log(forecastData);
         var lon = forecastData.coord.lon;
         var lat = forecastData.coord.lat;
-        function searchWeather(_city_) {
+        function searchWeather(city) {
             $.fetch({
                 url: "http://api.openweathermap.org/data/2.5/weather?q=" + city + ",au&appid=c7e4c50860cb5944f39ede1282e773c4"
             }).then(function (fetchData) {
@@ -22,7 +26,11 @@ function searchForecasts() {
 
         $.ajax({
             url: "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely&units=metric&appid=c7e4c50860cb5944f39ede1282e773c4",
-            method: "GET"
+            method: "GET",
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+            }
         }).then(function (allData) {
             console.log(allData)
             var cityName = $("<h2>").text(city.name);
@@ -35,8 +43,7 @@ function searchForecasts() {
 
             $("#searchResults").append(cityName, todayTemp, feelsLike, humidity, windSpeed, UvIndex);
         });
-        getSearchVal();
-        searchWeather(_city_);
+        searchWeather(city);
     });
 };
 
@@ -44,12 +51,8 @@ function searchForecasts() {
 $("#searchBtn").on("click", function (event) {
     // Preventing the button from trying to submit the form
     event.preventDefault();
+    city;
+    searchForecasts();
     // Storing the city name
-
-    getSearchVal();
 });
-function getSearchVal() {
-    var city = document.querySelector("#searchArea").val().trim();
-    //the variable is passed into this function and it will have to then be used in this function
-    searchForecasts(city);
-}
+
