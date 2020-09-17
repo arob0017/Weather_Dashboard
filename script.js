@@ -3,12 +3,11 @@ var savedLocations = [];
 var city;
 var storedCities = JSON.parse(window.localStorage.getItem("storedCities")) || [];
 
-
 function CityHistoryBtn(cityList) {
     // $("#searchResults").empty();
 
     if (savedLocations) {
-        $("#searchResults").empty();
+        $("#prevSearchBtns").empty();
         var btns = $("<div>").attr("class", "list-group");
         for (var i = 0; i < savedLocations.length; i++) {
             var cityBtn = $("<button>").attr("href", "#").attr("id", "city-btn").text(savedLocations[i]);
@@ -19,6 +18,7 @@ function CityHistoryBtn(cityList) {
                 cityBtn.attr("class", "list-group-item list-group-item-action");
             }
             btns.prepend(cityBtn);
+            $("#prevSearchBtns").append(btns);
         }
     }
 
