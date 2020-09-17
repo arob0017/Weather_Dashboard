@@ -11,5 +11,8 @@ h1 {
 form {
     padding: 10px;
 }
+#searchResults {
+   padding-right: 100px;
+}
 
 
