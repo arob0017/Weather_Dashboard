@@ -4,7 +4,7 @@ var city;
 var storedCities = JSON.parse(window.localStorage.getItem("storedCities")) || [];
 
 function CityHistoryBtn(cityList) {
-    // $("#searchResults").empty();
+    $("#searchResults").empty();
 
     if (savedLocations) {
         $("#prevSearchBtns").empty();
@@ -21,8 +21,7 @@ function CityHistoryBtn(cityList) {
             $("#prevSearchBtns").append(btns);
         }
     }
-
-}
+};
 function searchForecasts(city) {
     // CityHistoryBtn(cityList);
     $.ajax({
@@ -52,7 +51,7 @@ function searchForecasts(city) {
             console.log(allData)
 
 
-            var cityName = $("<h2>").text(forecastData.name);
+            var cityName = $("<h2>").text(city);
             var nowMoment = moment();
             var displayMoment = $("<h3>").text(nowMoment.format("MMM/D/YYYY"))
             var weatherIcon = $("<img>");
@@ -69,12 +68,12 @@ function searchForecasts(city) {
             $("#searchResults").empty();
             $("#searchResults").append(cityName, displayMoment, weatherIcon, todayTemp, feelsLike, humidity, windSpeed, UvIndex);
 
-            // for (var i = 1; i < allData.daily.length; i++) {
-            //     // var dayDate = $("<h4>").text(moment(format("MMM/D/YYYY")));
-            //     var dayTemp = $("<div>").text("Tempurature" + temp.day);
-            //     var dayHumidity = $("<div>").text("Humidity" + humidity);
-            //     $("#5DayForecast").append(dayDate, dayTemp, dayHumidity);
-            // }
+            //             // for (var i = 1; i < allData.daily.length; i++) {
+            //             //     // var dayDate = $("<h4>").text(moment(format("MMM/D/YYYY")));
+            //             //     var dayTemp = $("<div>").text("Tempurature" + temp.day);
+            //             //     var dayHumidity = $("<div>").text("Humidity" + humidity);
+            //             //     $("#5DayForecast").append(dayDate, dayTemp, dayHumidity);
+            //             // }
 
         });
     });
@@ -89,8 +88,9 @@ $("#searchBtn").on("click", function (event) {
     if (city != "") {
         storedCities.push(city);
         localStorage.setItem("storedCities", JSON.stringify(storedCities));
-        searchForecasts();
-        CityHistoryBtn();
-    }
 
+        CityHistoryBtn();
+        searchForecasts(city);
+
+    }
 });
