@@ -66,6 +66,7 @@ function searchForecasts(city) {
             // 5 Day Forecasts
 
             var newrow = $("<div>").attr("class", "forecast");
+            $("#5DayForecast").empty();
             $("#5DayForecast").append(newrow);
 
             //loop through array response to find the forecasts
