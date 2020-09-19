@@ -25,33 +25,30 @@
                     <input type="search" class="form-control" id="searchArea" aria-describedby="search"
                         placeholder="Search ...">
                     <button type="submit" class="btn btn-dark" id="searchBtn"><i class="fas fa-search"></i></button>
+                    <div id="prevSearchBtns"></div>
                 </form>
-                <div id="prevSearchBtns"></div>
+
             </div>
             <div class="forecasts">
-                <div id="todayForecast">
-                    <div class="card-body">
-                        <span id="city-name" class="city-name"></span>
-                        <span id="current-icon"></span>
-                        <!-- <img id="today-img" src="placeholder" alt=""> -->
-                    </div>
 
-                    <div class="row" class="col-md-8">
-                        <div class="card" class="results">
-                            <div class="card-body">
-                                <div class="card bg-light">
-                                    <div id="searchResults"></div>
-                                </div>
+                <div class="row" class="col-md-8">
+                    <div class="card" class="results">
+                        <div class="card-body">
+                            <div class="card bg-light">
+                                <div id="searchResults"></div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
-
-            <div id="5DayForecast">
+            </div>
+            <div>
+                <div class="col-md-12">
+                    <div id="5DayForecast" class="fiveDayForecasts"></div>
+                </div>
             </div>
         </section>
+
 
     </main>
 </body>

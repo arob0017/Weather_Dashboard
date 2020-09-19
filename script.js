@@ -65,6 +65,32 @@ function searchForecasts(city) {
 
             // 5 Day Forecasts
 
+            var newrow = $("<div>").attr("class", "forecast");
+            $("#5DayForecast").append(newrow);
+
+            //loop through array response to find the forecasts
+            for (var i = 1; i < allData.daily.length; i++) {
+
+                var newCol = $("<div>").attr("class", "one-fifth");
+                newrow.append(newCol);
+
+                var newCard = $("<div>").attr("class", "card text-white bg-primary");
+                newCol.append(newCard);
+
+                var cardHead = $("<div>").attr("class", "card-header").text(moment(allData.daily[i].dt, "X").format("MMM Do"));
+                newCard.append(cardHead);
+
+                var cardImg = $("<img>").attr("class", "card-img-top").attr("src", "https://openweathermap.org/img/wn/" + allData.daily[i].weather[0].icon + "@2x.png");
+                newCard.append(cardImg);
+
+                var bodyDiv = $("<div>").attr("class", "card-body");
+                newCard.append(bodyDiv);
+
+                bodyDiv.append($("<p>").attr("class", "card-text").html("Temp: " + allData.daily[i].temp.day + " °C"));
+                bodyDiv.append($("<p>").attr("class", "card-text").text("Humidity: " + allData.daily[i].humidity + "%"));
+
+            };
+
         });
     });
 };
