@@ -11,12 +11,7 @@ function CityHistoryBtn() {
         var btns = $("<div>").attr("class", "list-group");
         for (var i = 0; storedCities.length > i; i++) {
             var cityBtn = $("<button>").attr("href", "#").attr("id", "city-btn").text(storedCities[i]);
-            if (storedCities[i] == city) {
-                cityBtn.attr("class", "list-group-item list-group-item-action active");
-            }
-            else {
-                cityBtn.attr("class", "list-group-item list-group-item-action");
-            }
+            cityBtn.attr("class", "list-group-item list-group-item-action");
             btns.prepend(cityBtn);
             $("#prevSearchBtns").append(btns);
         }
