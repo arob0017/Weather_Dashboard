@@ -2,7 +2,7 @@
 var savedLocations = [];
 var city;
 var storedCities = JSON.parse(window.localStorage.getItem("storedCities")) || [];
-
+// Buttons for previously searched cities. Once search button clicked your search will be displayed underneath the search bar and become a button that can be clicked to show weather
 function CityHistoryBtn() {
     $("#searchResults").empty();
 
@@ -95,7 +95,7 @@ $("#searchBtn").on("click", function (event) {
     }
 });
 
-
+// Event Handler for previously searched buttons so when clicked they will show weather of that city
 $("#prevSearchBtns").on("click", "button", function (event) {
     event.preventDefault();
     var prevcity = $(this).text();
