@@ -12,6 +12,7 @@ form {
     padding: 10px;
 }
 #searchResults {
+   width: 700px;
    padding-right: 100px;
 }
 

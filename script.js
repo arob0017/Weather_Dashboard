@@ -45,7 +45,7 @@ function searchForecasts(city) {
         }).then(function (allData) {
             console.log(allData)
 
-
+            // Current Forecast
             var cityName = $("<h2>").text(city);
             var nowMoment = moment();
             var displayMoment = $("<h3>").text(nowMoment.format("MMM/D/YYYY"))
@@ -63,12 +63,7 @@ function searchForecasts(city) {
             $("#searchResults").empty();
             $("#searchResults").append(cityName, displayMoment, weatherIcon, todayTemp, feelsLike, humidity, windSpeed, UvIndex);
 
-            //             // for (var i = 1; i < allData.daily.length; i++) {
-            //             //     // var dayDate = $("<h4>").text(moment(format("MMM/D/YYYY")));
-            //             //     var dayTemp = $("<div>").text("Tempurature" + temp.day);
-            //             //     var dayHumidity = $("<div>").text("Humidity" + humidity);
-            //             //     $("#5DayForecast").append(dayDate, dayTemp, dayHumidity);
-            //             // }
+            // 5 Day Forecasts
 
         });
     });
