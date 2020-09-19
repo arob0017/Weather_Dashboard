@@ -3,7 +3,7 @@ var savedLocations = [];
 var city;
 var storedCities = JSON.parse(window.localStorage.getItem("storedCities")) || [];
 
-function CityHistoryBtn(cityList) {
+function CityHistoryBtn() {
     $("#searchResults").empty();
 
     if (savedLocations) {
@@ -23,7 +23,7 @@ function CityHistoryBtn(cityList) {
     }
 };
 function searchForecasts(city) {
-    // CityHistoryBtn(cityList);
+    CityHistoryBtn();
     $.ajax({
         url: "https://api.openweathermap.org/data/2.5/weather?q=" + city + ",au&units=metric&appid=c7e4c50860cb5944f39ede1282e773c4",
         method: "GET",
@@ -93,4 +93,12 @@ $("#searchBtn").on("click", function (event) {
         searchForecasts(city);
 
     }
+});
+
+
+$("#prevSearchBtns").on("click", "button", function (event) {
+    event.preventDefault();
+    var prevcity = $(this).text();
+
+    searchForecasts(prevcity, city);
 });
