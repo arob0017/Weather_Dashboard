@@ -65,18 +65,16 @@ function searchForecasts(city) {
 
             // 5 Day Forecasts
 
-            var newrow = $("<div>").attr("class", "forecast");
+
             $("#5DayForecast").empty();
-            $("#5DayForecast").append(newrow);
 
             //loop through array response to find the forecasts
-            for (var i = 1; i < allData.daily.length; i++) {
+            for (var i = 1; i <= 5; i++) {
 
-                var newCol = $("<div>").attr("class", "one-fifth");
-                newrow.append(newCol);
+
 
                 var newCard = $("<div>").attr("class", "card text-white bg-primary");
-                newCol.append(newCard);
+
 
                 var cardHead = $("<div>").attr("class", "card-header").text(moment(allData.daily[i].dt, "X").format("MMM Do"));
                 newCard.append(cardHead);
@@ -85,10 +83,12 @@ function searchForecasts(city) {
                 newCard.append(cardImg);
 
                 var bodyDiv = $("<div>").attr("class", "card-body");
-                newCard.append(bodyDiv);
+
 
                 bodyDiv.append($("<p>").attr("class", "card-text").html("Temp: " + allData.daily[i].temp.day + " °C"));
                 bodyDiv.append($("<p>").attr("class", "card-text").text("Humidity: " + allData.daily[i].humidity + "%"));
+                newCard.append(bodyDiv);
+                $("#5DayForecast").append(newCard);
 
             };
 

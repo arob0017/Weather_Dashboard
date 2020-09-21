@@ -12,11 +12,17 @@ form {
     padding: 10px;
     background-color: rgb(111, 165, 201);
 }
+.results{
+    width: 100% !important;
+
+}
+
 #searchResults {
-   width: 700px;
-   padding-right: 100px;
+    text-align: center;
+    margin: 0 auto;
 }
 
 .fiveDayForecasts {
     box-sizing: content-box;
+    justify-content: space-around;
 }
