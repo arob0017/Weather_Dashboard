@@ -17,6 +17,7 @@ function CityHistoryBtn() {
         }
     }
 };
+
 function searchForecasts(city) {
     CityHistoryBtn();
     $.ajax({
@@ -103,7 +104,9 @@ $("#searchBtn").on("click", function (event) {
     city = $("#searchArea").val().trim();
     console.log("You searched for " + city)
     if (city != "") {
-        storedCities.push(city);
+        if (storedCities.indexOf(city) === -1) {
+            storedCities.push(city);
+        }
         localStorage.setItem("storedCities", JSON.stringify(storedCities));
 
         CityHistoryBtn();
@@ -119,3 +122,4 @@ $("#prevSearchBtns").on("click", "button", function (event) {
 
     searchForecasts(prevcity, city);
 });
+
