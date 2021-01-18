@@ -123,3 +123,10 @@ $("#prevSearchBtns").on("click", "button", function (event) {
     searchForecasts(prevcity, city);
 });
 
+function clearHistory() {
+    $('#recentlySearched').empty();
+    storedRecipes = [];
+    localStorage.setItem('storedRecipes', JSON.stringify(storedRecipes));
+}
+$('#clearHistory').click(clearHistory);
+
